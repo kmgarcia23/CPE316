@@ -1,4 +1,39 @@
+# Kevin Garcia & Peter Phillips
+#CPE 315-01
 # Lab 1 question 1
+
+#This program returns the remainder of two numbers. The dividend must be a positive number
+#and the divisor must be a positive power of two. The program figures out the amount of bits
+#needed by using a counter to keep track of how many times iterator needed to be shifted 
+#until it was the same as div. Then it shifts num_copy by the amount specified in count
+#and subtracts the original number by the shifted num_copy. It will return the difference
+#or zero if the difference is equal to the divisor.
+
+#Java Code
+#public void fastMod()
+#{
+#	int num, div, count, num_copy, iterator, shifted, mod;
+#	System.out.println(" Fast Mode Program \n\n");
+#	System.out.println(" Enter an integer: ");
+#	Scanner input = new Scanner(System.in);
+#	num = input.nextInt();
+#	System.out.println(" Enter an integer: ");
+#	div = input.nextInt();
+#	iterator = 1;
+#	count = 0;
+#	num_copy = num;
+#	while(div != iterator)
+#	{
+#		num_copy = num_copy >> 1;
+#		iterator = iterator << 1;
+#		count++;
+#	}
+#	shifted = num_copy << count;
+#	mod = num - shifted;
+#	if(mod == div)
+#		mod = 0;
+#	System.out.println("\n Mod = " + mod);
+#}
 
 .globl welcome
 .globl prompt
