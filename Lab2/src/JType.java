@@ -1,6 +1,6 @@
 public class JType implements Instruction{
-    private String opcode;
-    private String address;
+    private final String opcode;
+    private final String address;
 
 
 

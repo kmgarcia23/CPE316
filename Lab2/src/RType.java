@@ -1,10 +1,10 @@
 public class RType implements Instruction{
-    private String opcode;
-    private String rs;
-    private String rt;
-    private String rd;
-    private String shamt;
-    private String funct;
+    private final String opcode;
+    private final String rs;
+    private final String rt;
+    private final String rd;
+    private final String shamt;
+    private final String funct;
 
     public RType(String rs, String rt, String rd, String shamt, String funct) {
         Util util = new Util();

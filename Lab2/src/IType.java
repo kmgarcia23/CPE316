@@ -1,17 +1,15 @@
 public class IType implements Instruction{
-    private String label;
-    private String opcode;
-    private String rs;
-    private String rt;
+    private final String opcode;
+    private final String rs;
+    private final String rt;
     private String imm;
 
 
     public IType(String label, String opcode, String rs, String rt, String imm) {
         Util util = new Util();
-        this.label =label;
         this.opcode = opcode;
         this.rs = util.registerParser(rs);
-        if(this.label.equals("lw") || this.label.equals("sw")){
+        if(label.equals("lw") || label.equals("sw")){
             StringBuilder strbld = new StringBuilder();
             boolean immfound = false;
             for(char i : imm.toCharArray()){
