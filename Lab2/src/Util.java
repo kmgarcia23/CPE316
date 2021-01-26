@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Util {
 
     private String decimalToBinary(int num){
@@ -65,6 +67,42 @@ public class Util {
                 return binaryFormater( 0, 2);
             default:
                 return "RegParse Error";
+
+        }
+    }
+
+    public Instruction instructionFactory(ArrayList<String> inst){
+        switch (inst.get(0)){
+            case "and":
+                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100100");
+            case "or":
+                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100101");
+            case "add":
+                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100000");
+            case "addi":
+                return new IType("001000", inst.get(1), inst.get(2), inst.get(3));
+            case "sll":
+                return new RType(inst.get(1), inst.get(2), inst.get(3), inst.get(4), "000000");
+            case "sub":
+                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100010");
+            case "slt":
+                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "101010");
+            case "beq":
+                return new IType("000100", inst.get(1), inst.get(2), inst.get(3));
+            case "bne":
+                return new IType("000101", inst.get(1), inst.get(2), inst.get(3));
+            case "lw":
+                return new IType("100011", inst.get(1), inst.get(2), inst.get(3));
+            case "sw":
+                return new IType("101011", inst.get(1), inst.get(2), inst.get(3));
+            case "j":
+                return new JType("000010", inst.get(1));
+            case "jr":
+                return new RType(inst.get(1), "0", "0", "0", "001000"); //register hard coded to 0
+            case "jal":
+                return new JType("000011", inst.get(1));
+            default:
+                return new nullType(inst.get(0));
 
         }
     }
