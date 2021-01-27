@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.io.File;
 
+/*
+CPE-315 Lab2
+Kevin Garcia and Peter Phillips
+ */
 public class Util {
 
     private String decimalToBinary(int num){

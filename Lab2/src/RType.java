@@ -1,3 +1,7 @@
+/*
+CPE-315 Lab2
+Kevin Garcia and Peter Phillips
+ */
 public class RType implements Instruction{
     private final String opcode;
     private final String rs;

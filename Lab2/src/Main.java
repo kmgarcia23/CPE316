@@ -1,6 +1,10 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.io.File;
+/*
+CPE-315 Lab2
+Kevin Garcia and Peter Phillips
+ */
 
 public class Main {
     private static final String[] valid_cmds = new String[] {"and", "or", "add", "addi", "sll", "sub", "slt", "beq", "bne", "lw", "sw", "j", "jr", "jal"};

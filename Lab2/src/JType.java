@@ -1,3 +1,7 @@
+/*
+CPE-315 Lab2
+Kevin Garcia and Peter Phillips
+ */
 public class JType implements Instruction{
     private final String opcode;
     private final String address;
