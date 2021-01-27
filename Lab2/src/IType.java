@@ -8,26 +8,15 @@ public class IType implements Instruction{
     public IType(String label, String opcode, String rs, String rt, String imm) {
         Util util = new Util();
         this.opcode = opcode;
-        this.rs = util.registerParser(rs);
         if(label.equals("lw") || label.equals("sw")){
-            StringBuilder strbld = new StringBuilder();
-            boolean immfound = false;
-            for(char i : imm.toCharArray()){
-                if(i != '(' && !immfound)strbld.append(i);
-                else if (i == '(') {
-                    immfound = true;
-                    this.imm = util.binaryFormater(Integer.parseInt(strbld.toString()), 0);
-                    strbld = new StringBuilder();
-                }
-                else if(i != ')')strbld.append(i);
-                else break;
-            }
-            this.rt = util.registerParser(strbld.toString());
-
+            this.imm = util.binaryFormater(Integer.parseInt(rt), 0);
+            this.rt = util.registerParser(rs);
+            this.rs = util.registerParser(imm);
         }
         else{
             this.imm = util.binaryFormater(Integer.parseInt(imm), 0);
             this.rt = util.registerParser(rt);
+            this.rs = util.registerParser(rs);
         }
     }
 

@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.FileNotFoundException;
+import java.util.*;
+import java.io.File;
 
 public class Util {
 
@@ -67,22 +70,22 @@ public class Util {
 
     public String registerParser(String reg){
         reg = reg.trim();
-        switch (reg.charAt(1)){
+        switch (reg.charAt(0)){
             case 'a':
-                return binaryFormater(Character.getNumericValue(reg.charAt(2)) + 4, 2);
+                return binaryFormater(Character.getNumericValue(reg.charAt(1)) + 4, 2);
             case 'v':
-                return binaryFormater(Character.getNumericValue(reg.charAt(2)) + 2, 2);
+                return binaryFormater(Character.getNumericValue(reg.charAt(1)) + 2, 2);
             case 's':
-                if(reg.charAt(2) == 'p'){
+                if(reg.charAt(1) == 'p'){
                     return binaryFormater( 29, 2);
                 }
-                return binaryFormater(Character.getNumericValue(reg.charAt(2)) + 16, 2);
+                return binaryFormater(Character.getNumericValue(reg.charAt(1)) + 16, 2);
             case 't':
-                if(Character.getNumericValue(reg.charAt(2)) <=7){
-                    return binaryFormater(Character.getNumericValue(reg.charAt(2)) + 8, 2);
+                if(Character.getNumericValue(reg.charAt(1)) <=7){
+                    return binaryFormater(Character.getNumericValue(reg.charAt(1)) + 8, 2);
                 }
                 else{
-                    return binaryFormater(Character.getNumericValue(reg.charAt(2)) + 16, 2);
+                    return binaryFormater(Character.getNumericValue(reg.charAt(1)) + 16, 2);
                 }
             case 'r':
                 return binaryFormater( 31, 2);
@@ -94,40 +97,45 @@ public class Util {
         }
     }
 
-    public Instruction instructionFactory(ArrayList<String> inst, HashMap<String, Integer> label){
+    public Instruction instructionFactory(ArrayList<String> inst, Map<String, Integer> label, int pc){
+        int jump;
         switch (inst.get(0)){
             case "and":
-                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100100");
+                return new RType(inst.get(2), inst.get(3), inst.get(1), "0", "100100");
             case "or":
-                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100101");
+                return new RType(inst.get(2), inst.get(3), inst.get(1), "0", "100101");
             case "add":
-                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100000");
+                return new RType(inst.get(2), inst.get(3), inst.get(1), "0", "100000");
             case "addi":
-                return new IType("addi", "001000", inst.get(1), inst.get(2), inst.get(3));
+                return new IType("addi", "001000", inst.get(2), inst.get(1), inst.get(3));
             case "sll":
-                return new RType(inst.get(1), inst.get(2), inst.get(3), inst.get(4), "000000");
+                return new RType("0", inst.get(2), inst.get(1), inst.get(3), "000000");
             case "sub":
-                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "100010");
+                return new RType(inst.get(2), inst.get(3), inst.get(1), "0", "100010");
             case "slt":
-                return new RType(inst.get(1), inst.get(2), inst.get(3), "0", "101010");
+                return new RType(inst.get(2), inst.get(3), inst.get(1), "0", "101010");
             case "beq":
-                return new IType("beq","000100", inst.get(1), inst.get(2), Integer.toString(label.get(inst.get(3))));
+                jump = label.get(inst.get(3));
+                if (pc > jump) jump = -1 *(pc - jump + 1);
+                else jump = jump -pc -1;
+                return new IType("beq","000100", inst.get(1), inst.get(2), Integer.toString(jump));
             case "bne":
-                return new IType("bne","000101", inst.get(1), inst.get(2), Integer.toString(label.get(inst.get(3))));
+                jump = label.get(inst.get(3));
+                if (pc > jump) jump = -1 *(pc - jump + 1);
+                else jump = jump -pc - 1;
+                return new IType("bne","000101", inst.get(1), inst.get(2), Integer.toString(jump));
             case "lw":
                 return new IType("lw", "100011", inst.get(1), inst.get(2), inst.get(3));
             case "sw":
                 return new IType("sw", "101011", inst.get(1), inst.get(2), inst.get(3));
             case "j":
-                return new JType("000010", inst.get(1));
+                return new JType("000010", Integer.toString(label.get(inst.get(1))));
             case "jr":
                 return new RType(inst.get(1), "0", "0", "0", "001000"); //register hard coded to 0
             case "jal":
-                return new JType("000011", inst.get(1));
+                return new JType("000011", Integer.toString(label.get(inst.get(1))));
             default:
-                System.out.println("invalid instruction: " + inst.get(0));
-                System.exit(1);
-                return new JType("0","0"); //useless
+                return new nullType(inst.get(0));
         }
     }
 }
