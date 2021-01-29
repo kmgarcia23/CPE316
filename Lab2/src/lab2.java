@@ -6,7 +6,7 @@ CPE-315 Lab2
 Kevin Garcia and Peter Phillips
  */
 
-public class Main {
+public class lab2 {
     private static final String[] valid_cmds = new String[] {"and", "or", "add", "addi", "sll", "sub", "slt", "beq", "bne", "lw", "sw", "j", "jr", "jal"};
 
     public static String cleanLabel(String[] cmd_array)
