@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.io.File;
 /*
-CPE-315 Lab2
+CPE-315 Lab3
 Kevin Garcia and Peter Phillips
  */
 

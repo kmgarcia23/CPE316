@@ -1,5 +1,5 @@
 /*
-CPE-315 Lab2
+CPE-315 Lab3
 Kevin Garcia and Peter Phillips
  */
 public class IType implements Instruction{
