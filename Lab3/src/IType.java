@@ -52,7 +52,8 @@ public class IType implements Instruction{
                 util.regData.replace(rt, util.memData.get(util.regData.get(rs) + Integer.parseInt(imm)));
                 break;
             case "sw":
-                util.memData.set()
+                util.memData.set(util.regData.get(rs) + Integer.parseInt(imm), util.regData.get(rt));
+                break;
         }
         return pc;
     }

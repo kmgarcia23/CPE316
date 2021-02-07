@@ -143,11 +143,11 @@ public class Util {
             case "sw":
                 return new IType("sw", "101011", inst.get(1), inst.get(2), inst.get(3), this);
             case "j":
-                return new JType("000010", Integer.toString(label.get(inst.get(1))), this);
+                return new JType(inst.get(0), "000010", Integer.toString(label.get(inst.get(1))), this);
             case "jr":
                 return new RType(inst.get(0), inst.get(1), "0", "0", "0", "001000", this); //register hard coded to 0
             case "jal":
-                return new JType("000011", Integer.toString(label.get(inst.get(1))), this);
+                return new JType(inst.get(0),"000011", Integer.toString(label.get(inst.get(1))), this);
             default:
                 return new nullType(inst.get(0));
         }
@@ -209,6 +209,12 @@ public class Util {
         System.out.println("$s1 = " + this.regData.get("s1") + "\t\t$s2 = " + this.regData.get("s2") + "\t\t$s3 = " + this.regData.get("s3") + "\t\t$s4 = " + this.regData.get("s4"));
         System.out.println("$s5 = " + this.regData.get("s5") + "\t\t$s6 = " + this.regData.get("s6") + "\t\t$s7 = " + this.regData.get("s7") + "\t\t$t8 = " + this.regData.get("t8"));
         System.out.println("$t9 = " + this.regData.get("t9") + "\t\t$sp = " + this.regData.get("sp") + "\t\t$ra = " + this.regData.get("ra"));
+    }
+
+    public void printMem(int start, int end){
+        for(int i = start; i <= end; i++){
+            System.out.println("["+ i + "]" + " = " + this.memData.get(i));
+        }
     }
 
 
