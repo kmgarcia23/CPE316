@@ -117,7 +117,10 @@ public class lab3 {
 
     public static void main(String[] args)
     {
-        Util util = new Util();
+        HashMap<String, Integer> regData = new HashMap<>();
+        ArrayList<Integer> memData = new ArrayList<>();
+        Util util = new Util(regData, memData);
+        //util.printReg(0);
         Map <String, Integer> labels = new HashMap<>();
         ArrayList<ArrayList<String>> commands = new ArrayList<>();
 //        System.out.println(util.binaryFormater(10, 1));

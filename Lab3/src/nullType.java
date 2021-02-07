@@ -13,4 +13,9 @@ public class nullType implements Instruction{
     public String toString() {
         return "invalid instruction: " + type;
     }
+
+    @Override
+    public int execute(int pc) {
+        return pc;
+    }
 }
